@@ -8,8 +8,8 @@ import {
 
 import "./App.css"
 
-import LoginPage from "./componenets/loginPage/loginPage"
-import CredentialsPage from "./componenets/protectedArea/credentialsPage"
+import LoginPage from "./componenets/login-page/loginPage"
+import CredentialsPage from "./componenets/protected-area/credentialsPage"
 
 function App() {
   return (
