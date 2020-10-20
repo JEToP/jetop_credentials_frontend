@@ -6,6 +6,8 @@ import {
   Redirect,
 } from "react-router-dom"
 
+import ProtectedRoute from "./componenets/utility/protectedRoute"
+
 import "./App.css"
 
 import LoginPage from "./componenets/login-page/loginPage"
@@ -18,33 +20,15 @@ function App() {
         <Route exact path="/login">
           <LoginPage />
         </Route>
-        <Route
-          path="/services-credentials"
-          render={() =>
-            fakeAuth.isAuthenticated ? (
-              <CredentialsPage />
-            ) : (
-              <Redirect to={{ pathname: "/login" }} />
-            )
-          }
-        />
-        <Route
-          path="*"
-          render={() =>
-            fakeAuth.isAuthenticated ? (
-              <Redirect to={{ pathname: "/services-credentials" }} />
-            ) : (
-              <Redirect to={{ pathname: "/login" }} />
-            )
-          }
-        />
+        <ProtectedRoute path="/services-credentials">
+          <CredentialsPage />
+        </ProtectedRoute>
+        <ProtectedRoute path="*">
+          <Redirect to={{ pathname: "/services-credentials" }} />
+        </ProtectedRoute>
       </Switch>
     </Router>
   )
 }
 
 export default App
-
-const fakeAuth = {
-  isAuthenticated: false,
-}
