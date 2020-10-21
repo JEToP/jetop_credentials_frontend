@@ -10,7 +10,7 @@ import ProtectedRoute from "./componenets/utility/protectedRoute"
 
 import "./App.css"
 
-import CredentialsPage from "./componenets/protected-area/credentialsPage"
+import CredentialsPage from "./componenets/templates/protected-area/credentialsPage"
 import LoginScreen from "./componenets/templates/login/LoginScreen.style"
 
 function App() {
