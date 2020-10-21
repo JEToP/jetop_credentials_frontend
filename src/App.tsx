@@ -12,6 +12,7 @@ import "./App.css"
 
 import LoginPage from "./componenets/login-page/loginPage"
 import CredentialsPage from "./componenets/protected-area/credentialsPage"
+import Service from "./componenets/protected-area/service"
 
 function App() {
   return (

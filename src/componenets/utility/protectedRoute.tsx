@@ -25,5 +25,5 @@ type protectedRouteProps = {
 }
 
 const fakeAuth = {
-  isAuthenticated: false,
+  isAuthenticated: true,
 }
