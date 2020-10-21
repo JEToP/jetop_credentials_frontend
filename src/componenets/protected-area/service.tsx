@@ -47,7 +47,7 @@ class Service extends Component<ServiceProps, ServiceState> {
 
     let headContent = ""
 
-    if (matches && matches.length > 1) {
+    if (matches && matches.length > 0) {
       headContent = matches[1]
     }
 
