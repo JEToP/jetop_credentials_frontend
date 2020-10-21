@@ -10,15 +10,15 @@ import ProtectedRoute from "./componenets/utility/protectedRoute"
 
 import "./App.css"
 
-import LoginPage from "./componenets/login-page/loginPage"
 import CredentialsPage from "./componenets/protected-area/credentialsPage"
+import LoginScreen from "./componenets/templates/login/LoginScreen.style"
 
 function App() {
   return (
     <Router>
       <Switch>
         <Route exact path="/login">
-          <LoginPage />
+          <LoginScreen />
         </Route>
         <ProtectedRoute path="/services-credentials">
           <CredentialsPage />
