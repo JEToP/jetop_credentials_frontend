@@ -1,0 +1,91 @@
+@import "src/helper";
+
+.login-right {
+  display: none;
+
+  @media (min-width: 1107px) {
+    display: block;
+    position: relative;
+    background-color: #0a263c;
+    width: 70%;
+    height: 100%;
+  }
+
+  .login-image-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .login-undraw {
+    position: relative;
+    top: -150px;
+
+    @media (min-width: 1580px) {
+      top: -150px;
+      left: -70px;
+    }
+  }
+
+  .login-undraw-main {
+    width: 500px;
+    position: relative;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 5;
+
+    @media (min-width: 1580px) {
+      width: 643px;
+    }
+  }
+
+  .login-undraw-background {
+    width: 550px;
+    position: absolute;
+    top: -80px;
+    bottom: 0;
+    left: -45px;
+    right: 0;
+    z-index: 1;
+  }
+
+  .login-app-title-container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    right: 120px;
+    bottom: 150px;
+    z-index: 6;
+    align-items: center;
+
+    @media (min-width: 1580px) {
+      position: absolute;
+    }
+  }
+
+  .login-app-title {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 4em;
+    position: relative;
+    color: white;
+
+    &:after {
+      background-color: #154871;
+      content: " ";
+      height: 25%;
+      position: absolute;
+      left: 0;
+      margin: -0.2rem;
+      top: 65%;
+      width: calc(100% + 2rem);
+      z-index: -1;
+    }
+  }
+}
