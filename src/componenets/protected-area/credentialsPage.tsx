@@ -1,7 +1,8 @@
 import React from "react"
+import Service from "./service"
 
 function CredentialsPage() {
-  return <p>Protected area</p>
+  return <Service />
 }
 
 export default CredentialsPage
