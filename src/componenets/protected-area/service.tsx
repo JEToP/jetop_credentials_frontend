@@ -54,7 +54,7 @@ class Service extends Component<ServiceProps, ServiceState> {
     if (!headContent) return ""
 
     /// Matches THE FIRST <link> tag whose [rel] property contains "icon" and extracts the url WITHOUT the domain
-    let faviconRegex = /<link.*rel=".*icon.*".*href="(.+)"\s?>/i
+    let faviconRegex = /<link.*rel=".*icon.*".*href="(.+)".*>/i
     matches = faviconRegex.exec(headContent)
 
     let faviconUrl = ""
