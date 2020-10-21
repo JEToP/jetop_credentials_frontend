@@ -7,10 +7,12 @@ const LoginRight = () => {
       <div className="login-image-container">
         <div className="login-undraw">
           <img
+            alt=""
             src="/assets/undraw_security.svg"
             className="login-undraw-main"
           />
           <img
+            alt=""
             src="/assets/undraw_background.svg"
             className="login-undraw-background"
           />
