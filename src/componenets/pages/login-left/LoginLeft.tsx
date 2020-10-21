@@ -5,7 +5,7 @@ import "./LoginLeft.style.scss"
 const LoginLeft = () => {
   return (
     <div className="login-left">
-      <img src="/assets/jetop_logo.png" className="login-logo" />
+      <img alt="" src="/assets/jetop_logo.png" className="login-logo" />
       <div className="login-content">
         <div className="login-header">
           <span className="login-title">Login.</span>
