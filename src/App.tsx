@@ -6,12 +6,12 @@ import {
   Redirect,
 } from "react-router-dom"
 
-import ProtectedRoute from "./componenets/utility/protectedRoute"
+import ProtectedRoute from "./components/utility/protectedRoute"
 
 import "./App.css"
 
-import CredentialsPage from "./componenets/templates/protected-area/credentialsPage"
-import LoginScreen from "./componenets/templates/login/LoginScreen.style"
+import CredentialsPage from "./components/templates/protected-area/credentialsPage"
+import LoginScreen from "./components/templates/login/LoginScreen.style"
 
 function App() {
   return (
