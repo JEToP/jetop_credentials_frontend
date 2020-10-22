@@ -1,44 +1,49 @@
-import React, { Component } from "react"
+import React, {
+  Component,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react"
 
-class Service extends Component<ServiceProps, ServiceState> {
-  static defaultProps: ServiceProps = {
-    serviceUrl: "https://www.jetop.com",
-    nickname: "JEToP Account",
-    username: "example@jetop.com",
-    password: "PraticamenteFinit0",
-    lastUsedPasswords: [],
-  }
+type ServiceProps = {
+  serviceUrl: string
+  nickname: string
+  username: string
+  password: string
+  lastUsedPasswords: Array<string>
+}
 
-  constructor(props: ServiceProps) {
-    super(props)
+const defaultProps: ServiceProps = {
+  serviceUrl: "https://www.jetop.com",
+  nickname: "JEToP Account",
+  username: "example@jetop.com",
+  password: "PraticamenteFinit0",
+  lastUsedPasswords: [],
+}
 
-    // This line allows me to use the 'this' keyword inside the following methods method
-    this.validateProps = this.validateProps.bind(this)
-    this.fetchFavicon = this.fetchFavicon.bind(this)
-    this.postNewService = this.postNewService.bind(this)
+const Service = (props: ServiceProps = defaultProps) => {
+  const { serviceUrl, nickname, username, password, lastUsedPasswords } = props
+  const [faviconUrl, setFaviconUrl] = useState("")
 
-    let isValid = this.validateProps()
+  useEffect(() => {
+    const isValid = validateProps()
+    if (isValid) postNewService()
+  }, [props])
 
-    if (isValid) {
-      this.postNewService()
-    } else {
-      throw "Error: invalid props provided to Service Component"
-    }
-  }
-
-  validateProps(): boolean {
-    if (!this.props.nickname) return false
-    if (!this.props.username) return false
-    if (!this.props.password) return false
-    if (!this.props.serviceUrl) return false
+  const validateProps = useCallback((): boolean => {
+    if (!nickname) return false
+    if (!username) return false
+    if (!password) return false
+    if (!serviceUrl) return false
 
     return true
-  }
+  }, [])
 
   // TODO can't test this function on localhost but I tested both the RegExp and they work as intended.
   // TODO I saw that google.com does not use a <link> tag to set it's favicon, more RegExp are needed for those cases.
-  async fetchFavicon(): Promise<string> {
-    let response = await fetch(this.props.serviceUrl)
+  const fetchFavicon = async (): Promise<string> => {
+    let response = await fetch(serviceUrl)
     let data: string = await response.text()
 
     // Match any number of characters between <head> tags. Case-insensitive, including newline
@@ -70,7 +75,7 @@ class Service extends Component<ServiceProps, ServiceState> {
       faviconUrl = ""
 
       if (matches && matches.length > 1) {
-        faviconUrl = `${this.props.serviceUrl}${matches[1]}`
+        faviconUrl = `${serviceUrl}${matches[1]}`
       }
 
       if (faviconUrl) break
@@ -82,18 +87,16 @@ class Service extends Component<ServiceProps, ServiceState> {
   }
 
   // TODO use actual Endpoint and structure data with the correct name system
-  async postNewService() {
-    let faviconUrl = await this.fetchFavicon()
-    this.setState({ faviconUrl })
-
+  const postNewService = async () => {
+    setFaviconUrl(await fetchFavicon())
     const DatabaseAPIPath = ""
 
     let data = {
-      serviceName: this.props.nickname,
-      username: this.props.username,
-      password: this.props.password,
-      serviceUrl: this.props.serviceUrl,
-      faviconUrl: this.state.faviconUrl,
+      serviceName: nickname,
+      username: username,
+      password: password,
+      serviceUrl: serviceUrl,
+      faviconUrl: faviconUrl,
     }
 
     let options = {
@@ -107,17 +110,7 @@ class Service extends Component<ServiceProps, ServiceState> {
     return fetch(DatabaseAPIPath, options)
   }
 
-  render() {
-    return <div></div>
-  }
-}
-
-type ServiceProps = {
-  serviceUrl: string
-  nickname: string
-  username: string
-  password: string
-  lastUsedPasswords: Array<string>
+  return <div>{faviconUrl}</div>
 }
 
 type ServiceState = {
