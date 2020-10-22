@@ -35,7 +35,7 @@ class Service extends Component<ServiceProps, ServiceState> {
     return true
   }
 
-  // TODO can't test this function on localhost but I tested both the RegExp and they work as intended   .
+  // TODO can't test this function on localhost but I tested both the RegExp and they work as intended.
   // TODO I saw that google.com does not use a <link> tag to set it's favicon, more RegExp are needed for those cases.
   async fetchFavicon(): Promise<string> {
     let response = await fetch(this.props.serviceUrl)
@@ -47,25 +47,36 @@ class Service extends Component<ServiceProps, ServiceState> {
 
     let headContent = ""
 
-    if (matches && matches.length > 0) {
+    if (matches && matches.length > 1) {
       headContent = matches[1]
     }
 
     if (!headContent) return ""
 
-    /// Matches THE FIRST <link> tag whose [rel] property contains "icon" and extracts the url WITHOUT the domain
-    let faviconRegex = /<link.*rel=".*icon.*".*href="(.+)".*>/i
-    matches = faviconRegex.exec(headContent)
+    let faviconRegexes: Array<RegExp> = []
+
+    // Matches THE FIRST <link> tag whose [rel] property contains "icon" and extracts the url WITHOUT the domain
+    let faviconLinkRegex = /<link.*rel=".*icon.*".*href="(.+)".*>/i
+    faviconRegexes.push(faviconLinkRegex)
+
+    // TODO add more RegExp to the array in order to handle other cases
 
     let faviconUrl = ""
 
-    if (matches && matches.length > 0) {
-      faviconUrl = `${this.props.serviceUrl}${matches[1]}`
+    for (let i = 0; i < faviconRegexes.length; i++) {
+      let currentRegExp = faviconRegexes[i]
+      matches = currentRegExp.exec(headContent)
+
+      faviconUrl = ""
+
+      if (matches && matches.length > 1) {
+        faviconUrl = `${this.props.serviceUrl}${matches[1]}`
+      }
+
+      if (faviconUrl) break
     }
 
-    if (!faviconUrl) return ""
-
-    console.log(faviconUrl)
+    // console.log(faviconUrl)
 
     return faviconUrl
   }
