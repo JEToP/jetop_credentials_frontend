@@ -2,7 +2,10 @@ import Button from "../../atoms/button/Button"
 import * as React from "react"
 import "./LoginLeft.style.scss"
 
-const LoginLeft = () => {
+type LoginLeftTypes = {
+  googleLoginOnClick: () => void
+}
+const LoginLeft = ({ googleLoginOnClick }: LoginLeftTypes) => {
   return (
     <div className="login-left">
       <img alt="" src="/assets/jetop_logo.png" className="login-logo" />
@@ -15,7 +18,7 @@ const LoginLeft = () => {
           </span>
         </div>
       </div>
-      <div className="login-interactive">
+      <div className="login-interactive" onClick={googleLoginOnClick}>
         <Button label="Google Login" />
         <span className="login-footer">
           Non sei di JEToP?
