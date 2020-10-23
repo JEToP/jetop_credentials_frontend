@@ -6,24 +6,17 @@ import React, {
   useState,
 } from "react"
 
+import ServiceData from "../../../models/Service"
+
 type ServiceProps = {
-  serviceUrl: string
-  nickname: string
+  serviceData: ServiceData
   username: string
   password: string
-  lastUsedPasswords: Array<string>
 }
 
-const defaultProps: ServiceProps = {
-  serviceUrl: "https://www.jetop.com",
-  nickname: "JEToP Account",
-  username: "example@jetop.com",
-  password: "PraticamenteFinit0",
-  lastUsedPasswords: [],
-}
-
-const Service = (props: ServiceProps = defaultProps) => {
-  const { serviceUrl, nickname, username, password, lastUsedPasswords } = props
+const Service = (props: ServiceProps) => {
+  const { name, id, notes, url, favicon } = props.serviceData
+  const { username, password } = props
   const [faviconUrl, setFaviconUrl] = useState("")
 
   useEffect(() => {
@@ -32,18 +25,18 @@ const Service = (props: ServiceProps = defaultProps) => {
   }, [props])
 
   const validateProps = useCallback((): boolean => {
-    if (!nickname) return false
+    if (!name) return false
     if (!username) return false
     if (!password) return false
-    if (!serviceUrl) return false
+    if (!url) return false
 
     return true
   }, [])
 
-  // TODO can't test this function on localhost but I tested both the RegExp and they work as intended.
-  // TODO I saw that google.com does not use a <link> tag to set it's favicon, more RegExp are needed for those cases.
+  // TODO: can't test this function on localhost but I tested both the RegExp and they work as intended.
+  // FIXME: I saw that google.com does not use a <link> tag to set it's favicon, more RegExp are needed for those cases.
   const fetchFavicon = async (): Promise<string> => {
-    let response = await fetch(serviceUrl)
+    let response = await fetch(url ?? "www.jetop.com")
     let data: string = await response.text()
 
     // Match any number of characters between <head> tags. Case-insensitive, including newline
@@ -64,7 +57,7 @@ const Service = (props: ServiceProps = defaultProps) => {
     let faviconLinkRegex = /<link.*rel=".*icon.*".*href="(.+)".*>/i
     faviconRegexes.push(faviconLinkRegex)
 
-    // TODO add more RegExp to the array in order to handle other cases
+    // FIXME: add more RegExp to the array in order to handle other cases
 
     let faviconUrl = ""
 
@@ -75,7 +68,7 @@ const Service = (props: ServiceProps = defaultProps) => {
       faviconUrl = ""
 
       if (matches && matches.length > 1) {
-        faviconUrl = `${serviceUrl}${matches[1]}`
+        faviconUrl = `${url}${matches[1]}`
       }
 
       if (faviconUrl) break
@@ -86,35 +79,49 @@ const Service = (props: ServiceProps = defaultProps) => {
     return faviconUrl
   }
 
-  // TODO use actual Endpoint and structure data with the correct name system
+  // FIXME: use actual Endpoint
   const postNewService = async () => {
+    return makeHttpRequest("api.jetop-services.com", "POST")
+  }
+
+  // FIXME: use actual Endpoint
+  const updateService = async () => {
+    return makeHttpRequest("api.jetop-services.com", "PATCH")
+  }
+
+  // TODO: Use correct naming system for data
+  // TODO: Add access token
+  const makeHttpRequest = async (endpoint: string, method: string) => {
     setFaviconUrl(await fetchFavicon())
-    const DatabaseAPIPath = ""
 
-    let data = {
-      serviceName: nickname,
-      username: username,
-      password: password,
-      serviceUrl: serviceUrl,
-      faviconUrl: faviconUrl,
-    }
+    const headers = { "Content-Type": "application/json" }
 
-    let options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+    let data = getDataObject()
+    let options = getOptionsObject(method, headers, data)
+
+    return fetch(endpoint, options)
+  }
+
+  const getOptionsObject = (method: string, headers: {}, data: {}) => {
+    return {
+      method,
+      headers,
       body: JSON.stringify(data),
     }
+  }
 
-    return fetch(DatabaseAPIPath, options)
+  const getDataObject = () => {
+    return {
+      id,
+      serviceName: name,
+      username,
+      password,
+      serviceUrl: url,
+      faviconUrl,
+    }
   }
 
   return <div>{faviconUrl}</div>
-}
-
-type ServiceState = {
-  faviconUrl: string
 }
 
 export default Service
