@@ -2,7 +2,8 @@ export function generatePassword(
   pwdLength: number,
   includeCaps: boolean,
   includeNumbers: boolean,
-  includeSpecialChars: boolean
+  includeSpecialChars: boolean,
+  avoidAmbiguousChars: boolean
 ): string {
   // Each alphabet has a probability of being actually chosen
   const lowAlphabet = {
@@ -21,6 +22,9 @@ export function generatePassword(
     prob: 0.2,
     data: `!"#$%&'()*+,-./:;<=>?@[\\]^_\`{|}~`,
   }
+
+  // Except for the standard ambiguous characters, I added single and double quotes, as long as `(backtick)
+  const ambiguousChars = `0Oo1Il'"\``
 
   const atLeastOneLowerCase = /[a-z]+/
   const atLeastOneUpperCase = /[A-Z]+/
@@ -74,7 +78,20 @@ export function generatePassword(
 
       // Getting random integer to pick a symbol from selected collection
       let symbIndex = Math.floor(Math.random() * collection.data.length)
-      password += collection.data[symbIndex]
+      let chosenChar = collection.data[symbIndex]
+
+      // Avoiding ambiguous chars
+      if (avoidAmbiguousChars) {
+        let isAmbiguous = ambiguousChars.includes(chosenChar)
+
+        while (isAmbiguous) {
+          symbIndex = Math.floor(Math.random() * collection.data.length)
+          chosenChar = collection.data[symbIndex]
+          isAmbiguous = ambiguousChars.includes(chosenChar)
+        }
+      }
+
+      password += chosenChar
     }
 
     // Checking password validity
