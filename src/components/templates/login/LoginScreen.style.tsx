@@ -2,7 +2,7 @@ import React, { useEffect } from "react"
 import "./LoginScreen.scss"
 import LoginLeft from "../../pages/login-left/LoginLeft"
 import LoginRight from "../../pages/login-right/LoginRight"
-import { GoogleLoginResponse, useGoogleLogin } from "react-google-login"
+import { useGoogleLogin } from "react-google-login"
 
 declare var google: any
 
@@ -11,7 +11,7 @@ const CLIENT_ID =
 
 const LoginScreen = () => {
   const handleCredentialResponse = (tokenId: string) => console.log(tokenId)
-  const { signIn, loaded } = useGoogleLogin({
+  const { signIn } = useGoogleLogin({
     clientId: CLIENT_ID,
     onSuccess: (response: any) => handleCredentialResponse(response.tokenId),
     onFailure: (e) => console.error(e),
