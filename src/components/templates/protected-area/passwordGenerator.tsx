@@ -25,7 +25,7 @@ const PasswGenerator = (props: any) => {
             <input
               type="range"
               min="6"
-              max="20"
+              max="40"
               value={count}
               onChange={handleChange}
               className="slider"
