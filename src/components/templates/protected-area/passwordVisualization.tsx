@@ -3,7 +3,7 @@ import "./passwordVisualization.scss"
 
 //show password in different color based on matched char
 const PasswordVisualization = (props: any) => {
-  let passw = props.value
+  let passw = props.valueActual
   let str: any[] = []
   let i: number
   for (i = 0; i < passw.length; i++) {
@@ -15,13 +15,7 @@ const PasswordVisualization = (props: any) => {
       str[i] = <span className="passw-special">{passw[i]}</span>
     }
   }
-  return (
-    <div>
-      {" "}
-      password
-      <h1>{str}</h1>
-    </div>
-  )
+  return <span className="passwVisual">{str}</span>
 }
 
 export default PasswordVisualization
