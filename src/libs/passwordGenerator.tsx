@@ -29,7 +29,7 @@ export function generatePassword(
   const atLeastOneLowerCase = /[a-z]+/
   const atLeastOneUpperCase = /[A-Z]+/
   const atLeastOneNumber = /[0-9]+/
-  const atLeastOneSpecial = /[!"#\$%\&'\(\)\*\+,-\.\/:;<=>\?@\[\\\]\^_`{\|}~]+/
+  const atLeastOneSpecial = /[!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~s]+/
 
   // I assume that every password contains lowercase characters
   let allowedCollections = [lowAlphabet]
@@ -56,7 +56,9 @@ export function generatePassword(
   // This check allows us to avoid infinite loops because, for example,
   // you can't have both numbers and specials if your password is only 1 character long
   if (pwdLength < allowedCollections.length) {
-    throw `Using this settings, password must be at least ${allowedCollections.length} characters long`
+    throw new Error(
+      `Using this settings, password must be at least ${allowedCollections.length} characters long`
+    )
   }
 
   while (!passwordIsValid) {
