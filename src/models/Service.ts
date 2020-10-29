@@ -1,4 +1,4 @@
-export interface Service {
+export default interface Service {
   id?: number
   name: string
   favicon?: string
