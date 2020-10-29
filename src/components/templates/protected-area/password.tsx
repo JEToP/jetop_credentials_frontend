@@ -1,15 +1,15 @@
 import React, { useState } from "react"
 import PasswordVisualization from "./passwordVisualization"
-import PasswGenerator from "./passwordGenerator"
+import PasswGenerator from "./passwordGeneratorUi"
 import PasswordHistory from "./passwordHistory"
 import ProgressBar from "./progressBar"
 import "./password.style.scss"
 
-// This component shows current password and older, and adds the possibility to create a new one
+// This component shows current password, gives the ability to create a new one and can shows also password history
 
 // TODO password history is a list of older passw
 const Password = (props: any) => {
-  const { actualPassword, newPassword, history, strength } = props
+  const { actualPassword, history, strength } = props
   const [status, setStatus] = useState(false)
 
   return (
@@ -19,14 +19,16 @@ const Password = (props: any) => {
           <div className="colPsw">
             <div className="tabRow">Password:</div>
             <div className="tabRow">Strength:</div>
-            <div className="tabRow" id="ultimeMod">Ultime modifiche:</div>
+            <div className="tabRow" id="ultimeMod">
+              Ultime modifiche:
+            </div>
           </div>
           <div className="colPsw">
             <div className="tabRow">
               <PasswordVisualization valueActual={actualPassword} />
             </div>
             <div className="tabRow">
-              <ProgressBar percentage={strength}/>
+              <ProgressBar percentage={strength} />
             </div>
             <div id="historyTabRow">
               <PasswordHistory history={history} />
@@ -39,10 +41,7 @@ const Password = (props: any) => {
         </button>
       </div>
       {status && (
-        <PasswGenerator
-          value={newPassword}
-          closeModal={() => setStatus(false)}
-        ></PasswGenerator>
+        <PasswGenerator closeModal={() => setStatus(false)}></PasswGenerator>
       )}
     </div>
   )
