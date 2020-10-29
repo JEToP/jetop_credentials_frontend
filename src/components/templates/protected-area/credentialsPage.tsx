@@ -11,6 +11,7 @@ function CredentialsPage() {
       history={["h!story1", "h!story2", "h!story3"]}
       actualPassword="myActualPassw123!!"
       newPassword="myN3wAmaz1ngPassw!!"
+      strength="81%"
     />
   )
 }
