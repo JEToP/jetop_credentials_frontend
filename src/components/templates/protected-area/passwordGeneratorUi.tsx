@@ -13,12 +13,9 @@ const PasswGenerator = (props: any) => {
   const [isAmbiguous, setAmbiguous] = useState(false)
 
   const { closeModal } = props
-  let pswValue = generatePassword(
-    count,
-    isUpperCase,
-    isNum,
-    isSpecial,
-    isAmbiguous
+
+  const [pswValue, setPsw] = useState(
+    generatePassword(count, isUpperCase, isNum, isSpecial, isAmbiguous)
   )
 
   function handleChange(e: any) {
@@ -38,14 +35,8 @@ const PasswGenerator = (props: any) => {
   }
 
   useEffect(() => {
-    pswValue = generatePassword(
-      count,
-      isUpperCase,
-      isNum,
-      isSpecial,
-      isAmbiguous
-    )
-  })
+    setPsw(generatePassword(count, isUpperCase, isNum, isSpecial, isAmbiguous))
+  }, [count, isUpperCase, isNum, isSpecial, isAmbiguous])
 
   return (
     <div className="passwGeneratorContainer">
