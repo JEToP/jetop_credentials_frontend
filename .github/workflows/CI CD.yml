@@ -1,0 +1,58 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ develop ]
+  pull_request:
+    branches: [ develop ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      - name: Package install
+        uses: bahmutov/npm-install@v1.1.0
+      
+      - name: Production Build
+        run: yarn run build
+      
+      - name: Store Artifact
+        uses: actions/upload-artifact@v2.2.0
+        with:
+          path: build
+  
+  upload:
+    needs: [build]
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    steps:
+      - name: Download Build Artifact
+        uses: actions/download-artifact@v2.0.5
+
+      - name: FTP Upload
+        uses: sand4rt/ftp-deployer@v1.0
+        with:
+          host: ${{secrets.FTP_HOST}}
+          username: ${{secrets.FTP_USER}}
+          password: ${{secrets.FTP_PASSWORD}}
+          local_folder: './artifact'
+          remote_folder: .
+          cleanup: true  
+    
+    
