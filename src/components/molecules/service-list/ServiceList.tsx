@@ -20,7 +20,8 @@ export function ServiceList(props: ServiceListProps) {
   const filteredServices = props.services.filter(
     (service) =>
       !searchValue ||
-      service.name.toLowerCase().indexOf(searchValue.toLowerCase()) >= 0
+      service.name.toLowerCase().indexOf(searchValue.toLowerCase()) >= 0 ||
+      (service.url?.toLowerCase().indexOf(searchValue.toLowerCase()) ?? -1) >= 0
   )
 
   const mappedServices = filteredServices.map((service) => (
