@@ -11,7 +11,7 @@ import ProtectedRoute from "./components/utility/protectedRoute"
 import "./App.css"
 
 import LoginScreen from "./components/templates/login/LoginScreen.style"
-import CredentialsPage from "./components/templates/protected-area/CredentialsPage"
+import ServicesPage from "./components/templates/protected-area/ServicesPage"
 
 function App() {
   return (
@@ -20,11 +20,11 @@ function App() {
         <Route exact path="/login">
           <LoginScreen />
         </Route>
-        <ProtectedRoute path="/services-credentials">
-          <CredentialsPage />
+        <ProtectedRoute path="/services/:id?">
+          <ServicesPage />
         </ProtectedRoute>
         <ProtectedRoute path="*">
-          <Redirect to={{ pathname: "/services-credentials" }} />
+          <Redirect to={{ pathname: "/services" }} />
         </ProtectedRoute>
       </Switch>
     </Router>
