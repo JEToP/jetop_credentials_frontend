@@ -1,11 +1,17 @@
-import React, { useState } from "react"
+import React, { useCallback } from "react"
+import { useParams, useHistory } from "react-router-dom"
 import { useServiceContext } from "../../../hooks/useServiceContext"
 import { ServiceList } from "../../molecules/service-list/ServiceList"
 import Service from "../../../models/Service"
 
-function CredentialsPage() {
-  const [activeService, setActiveService] = useState<Service | null>(null)
+function ServicesPage() {
+  const { id } = useParams()
+  const history = useHistory()
   const Services = useServiceContext({ fetchOnLoad: true })
+  const setActiveService = useCallback(
+    (item: Service) => history.push(`/services/${item.id}`),
+    [history]
+  )
 
   if (Services.loading || !Services.data?.length) return null
 
@@ -14,10 +20,10 @@ function CredentialsPage() {
       <ServiceList
         services={Services.data}
         onItemClick={setActiveService}
-        activeServiceId={activeService?.id}
+        activeServiceId={parseInt(id)}
       />
     </div>
   )
 }
 
-export default CredentialsPage
+export default ServicesPage
