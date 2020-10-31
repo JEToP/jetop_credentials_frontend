@@ -1,4 +1,4 @@
-import React, { useCallback } from "react"
+import React from "react"
 import "./ServiceList.scss"
 import Service from "../../../models/Service"
 import { ServiceListItem } from "../../atoms/service-list-item/ServiceListItem"
