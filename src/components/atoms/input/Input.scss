@@ -1,0 +1,20 @@
+.Input {
+  flex: 1;
+
+  padding: 8px 6px;
+  font-size: 0.875rem;
+  background-color: rgb(250, 251, 252);
+  border: 2px solid rgb(223, 225, 230);
+  border-radius: 3px;
+  transition: background-color 0.2s ease-in-out 0s,
+    border-color 0.2s ease-in-out 0s;
+
+  &:active,
+  &:focus {
+    background-color: #ffffff;
+  }
+
+  &:hover:not(:focus):not(active) {
+    background-color: rgb(235, 236, 240);
+  }
+}
