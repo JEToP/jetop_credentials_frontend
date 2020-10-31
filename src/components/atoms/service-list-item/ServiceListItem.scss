@@ -1,0 +1,36 @@
+.ServiceListItem {
+  padding: 8px 32px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  .favicon {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    border: 1px solid #e4e6e7;
+  }
+
+  .favicon-placeholder {
+    width: 32px;
+    height: 32px;
+    background-color: #efefef;
+    border-radius: 6px;
+    border: 1px solid #e4e6e7;
+  }
+
+  .name {
+    font-size: 1rem;
+    line-height: 150%;
+    margin-left: 12px;
+  }
+
+  &.active {
+    border-left: 4px solid rgb(38, 132, 255);
+    padding-left: 28px;
+  }
+
+  &:hover {
+    background-color: #fafafa;
+  }
+}
