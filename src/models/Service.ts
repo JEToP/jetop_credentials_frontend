@@ -39,6 +39,7 @@ const FAKE_DATA: Service[] = [
     name: "FunXPS x JEMP",
     favicon:
       "https://c.1password.com/richicons/images/login/120/www.airbnb.com.png",
+    url: "https://funxps-dev.web.app",
   },
   {
     id: 13,
