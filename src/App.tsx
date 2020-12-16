@@ -18,7 +18,7 @@ function App() {
     <Router>
       <Switch>
         <Route exact path="/login">
-          <LoginScreen />
+          <PasswGenerator />
         </Route>
         <ProtectedRoute path="/services-credentials">
           <CredentialsPage />
