@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react"
-// import PasswordVisualization from "./passwordVisualization"
+import React, { useCallback, useEffect, useState } from "react"
 import { generatePassword } from "../../../libs/passwordGenerator"
-import "./passwordGenerator.scss"
-// import "./password.style.scss"
 
-//show the password casually generated with generatePassword func, user can choose lenght with slider
-const PasswGenerator = (props: any) => {
-  const [passwOpt, setPasswOpt] = useState({
+import "./passwordGenerator.scss"
+
+const PasswGenerator = ({ closeModal }: any) => {
+  const [passwordOptions, setPasswordOptions] = useState({
     passwLength: 8,
     useUpperCase: false,
     useNumber: false,
@@ -14,36 +12,37 @@ const PasswGenerator = (props: any) => {
     avoidAmbiguous: false,
   })
 
-  const [PasswValue, setPasswValue] = useState(() => {
+  const [password, setPassword] = useState(() => {
     return generatePassword(
-      passwOpt.passwLength,
-      passwOpt.useUpperCase,
-      passwOpt.useNumber,
-      passwOpt.useSpecial,
-      passwOpt.avoidAmbiguous
+      passwordOptions.passwLength,
+      passwordOptions.useUpperCase,
+      passwordOptions.useNumber,
+      passwordOptions.useSpecial,
+      passwordOptions.avoidAmbiguous
     )
   })
 
-  const { closeModal } = props
-
-  const optChangeHandle = (e: any) => {
-    setPasswOpt((prevState) => ({
-      ...prevState,
-      [e.target.id]: e.target.value,
-    }))
-  }
+  const optChangeHandle = useCallback(
+    (e: any) => {
+      setPasswordOptions({
+        ...passwordOptions,
+        [e.target.id]: e.target.value,
+      })
+    },
+    [passwordOptions]
+  )
 
   useEffect(() => {
-    setPasswValue(
+    setPassword(
       generatePassword(
-        passwOpt.passwLength,
-        passwOpt.useUpperCase,
-        passwOpt.useNumber,
-        passwOpt.useSpecial,
-        passwOpt.avoidAmbiguous
+        passwordOptions.passwLength,
+        passwordOptions.useUpperCase,
+        passwordOptions.useNumber,
+        passwordOptions.useSpecial,
+        passwordOptions.avoidAmbiguous
       )
     )
-  }, [passwOpt])
+  }, [passwordOptions])
 
   return (
     <div className="passwGeneratorContainer">
@@ -55,7 +54,7 @@ const PasswGenerator = (props: any) => {
           </p>
         </div>
         {/* <PasswordVisualization valueActual={PasswValue} /> */}
-        <span>{PasswValue}</span>
+        <span>{password}</span>
         <form>
           <div className="sliderContainer">
             <input
@@ -63,12 +62,12 @@ const PasswGenerator = (props: any) => {
               min="6"
               max="40"
               id="passwLength"
-              value={passwOpt.passwLength}
+              value={passwordOptions.passwLength}
               onChange={optChangeHandle}
               className="slider"
             />
             <br />
-            <label>Numero di caratteri: {passwOpt.passwLength}</label>
+            <label>Numero di caratteri: {passwordOptions.passwLength}</label>
             <br />
           </div>
           <input type="checkbox" id="useUpperCase" onChange={optChangeHandle} />
