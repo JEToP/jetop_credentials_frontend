@@ -1,14 +1,15 @@
 import React, { ReactNode, useMemo } from "react"
-import "./PasswordVisualizer.scss"
+import "./passwordVisualization.scss"
 
 type PasswordVisualizationProps = {
   password: string
 }
-const PasswordVisualizer = (props: PasswordVisualizationProps) => {
+const PasswordVisualization = (props: PasswordVisualizationProps) => {
   const { password } = props
 
   let str: ReactNode[] = useMemo(() => {
     const app: ReactNode[] = []
+    console.log(password)
     for (let i = 0; i < password.length; i++) {
       if (password[i].match(/[A-z]/)) {
         app[i] = <span className="passw-alpha">{password[i]}</span>
@@ -24,4 +25,4 @@ const PasswordVisualizer = (props: PasswordVisualizationProps) => {
   return <span className="password-visualizer">{str}</span>
 }
 
-export default PasswordVisualizer
+export default PasswordVisualization

@@ -1,8 +1,8 @@
 import React, {
-  Component,
+  // Component,
   useCallback,
   useEffect,
-  useMemo,
+  // useMemo,
   useState,
 } from "react"
 
@@ -15,14 +15,21 @@ type ServiceProps = {
 }
 
 const Service = (props: ServiceProps) => {
-  const { name, id, notes, url, favicon } = props.serviceData
+  const {
+    name,
+    id,
+    // notes,
+    url,
+    // favicon
+  } = props.serviceData
   const { username, password } = props
   const [faviconUrl, setFaviconUrl] = useState("")
 
   useEffect(() => {
     const isValid = validateProps()
     if (isValid) postNewService()
-  }, [props])
+  })
+  // , [props]
 
   const validateProps = useCallback((): boolean => {
     if (!name) return false
@@ -31,7 +38,7 @@ const Service = (props: ServiceProps) => {
     if (!url) return false
 
     return true
-  }, [])
+  }, [name, password, url, username])
 
   // TODO: can't test this function on localhost but I tested both the RegExp and they work as intended.
   // FIXME: I saw that google.com does not use a <link> tag to set it's favicon, more RegExp are needed for those cases.
@@ -85,9 +92,9 @@ const Service = (props: ServiceProps) => {
   }
 
   // FIXME: use actual Endpoint
-  const updateService = async () => {
-    return makeHttpRequest("api.jetop-services.com", "PATCH")
-  }
+  // const updateService = async () => {
+  //   return makeHttpRequest("api.jetop-services.com", "PATCH")
+  // }
 
   // TODO: Use correct naming system for data
   // TODO: Add access token
