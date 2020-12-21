@@ -2,6 +2,8 @@ import React, { useCallback, useEffect, useState } from "react"
 import { generatePassword } from "../../../libs/passwordGenerator"
 
 import "./passwordGenerator.scss"
+import PasswordVisualization from "./passwordVisualization"
+import ProgressBar from "./progressBar"
 
 const PasswGenerator = ({ closeModal }: any) => {
   const [passwordOptions, setPasswordOptions] = useState({
@@ -53,8 +55,9 @@ const PasswGenerator = ({ closeModal }: any) => {
             X
           </p>
         </div>
-        {/* <PasswordVisualization valueActual={PasswValue} /> */}
-        <span>{password}</span>
+        <PasswordVisualization password={password} />
+        <ProgressBar pwd={password} />
+
         <form>
           <div className="sliderContainer">
             <input
