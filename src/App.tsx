@@ -11,7 +11,7 @@ import ProtectedRoute from "./components/utility/protectedRoute"
 import "./App.css"
 
 import LoginScreen from "./components/templates/login/LoginScreen.style"
-import CredentialsPage from "./components/templates/protected-area/CredentialsPage"
+import CredentialsPage from "./components/templates/protected-area/credentialsPage"
 
 function App() {
   return (
