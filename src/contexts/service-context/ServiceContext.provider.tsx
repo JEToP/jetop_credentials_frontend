@@ -23,7 +23,7 @@ export function ServiceContextProvider({ children }: any) {
       loading: true,
     })
 
-    const result = await fakeRequest(true, ServiceFaker.array(1))
+    const result = await fakeRequest(true, ServiceFaker.array())
 
     setState({
       ...state,
