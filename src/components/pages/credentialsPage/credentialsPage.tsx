@@ -1,6 +1,6 @@
 import React from "react"
 import { useServiceContext } from "../../../hooks/useServiceContext"
-import Password from "./password"
+import Password from "../../templates/password/password"
 
 function CredentialsPage() {
   const Services = useServiceContext({ fetchOnLoad: true })

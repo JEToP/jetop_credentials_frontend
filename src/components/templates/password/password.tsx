@@ -1,8 +1,8 @@
 import React, { useState } from "react"
-import PasswordVisualization from "./passwordVisualization"
-import PasswGenerator from "./passwordGeneratorModal"
-import PasswordHistory from "./passwordHistory"
-import ProgressBar from "./progressBar"
+import PasswordVisualization from "../../molecules/password-visualization/passwordVisualization"
+import PasswGenerator from "../../molecules/password-generator/passwordGeneratorModal"
+import PasswordHistory from "../../molecules/password-visualization/passwordHistory"
+import ProgressBar from "../../molecules/progress-bar/progressBar"
 import "./password.style.scss"
 
 // This component shows current password and older, and adds the possibility to create a new one
@@ -16,11 +16,13 @@ const Password = (props: any) => {
     <div>
       <div className="passwordContainer">
         <div className="rowPsw">
-          <div className="colPsw">
-            <div className="tabRow">Password:</div>
-            <div className="tabRow">Strength:</div>
+          <div className="colLabel">
+            <div className="tabRow">
+              <p>Password</p>
+            </div>
+            <div className="tabRow"></div>
             <div className="tabRow" id="ultimeMod">
-              Ultime modifiche:
+              <p>Ultime modifiche</p>
             </div>
           </div>
           <div className="colPsw">

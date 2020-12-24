@@ -2,8 +2,8 @@ import React, { useCallback, useEffect, useState } from "react"
 import { generatePassword } from "../../../libs/passwordGenerator"
 
 import "./passwordGenerator.scss"
-import PasswordVisualization from "./passwordVisualization"
-import ProgressBar from "./progressBar"
+import PasswordVisualization from "../password-visualization/passwordVisualization"
+import ProgressBar from "../progress-bar/progressBar"
 
 const PasswGenerator = ({ closeModal }: any) => {
   const [passwordOptions, setPasswordOptions] = useState({
