@@ -8,7 +8,7 @@ type ButtonEditProps = {
 }
 const ButtonShadedGray = ({ onClick, label }: ButtonEditProps) => {
   return (
-    <BaseButton onClick={onClick} className="button-edit">
+    <BaseButton onClick={onClick} className="button-shaded-gray">
     {label}
     </BaseButton>
 )

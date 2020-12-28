@@ -8,7 +8,7 @@ type ButtonSaveProps = {
 }
 const ButtonPrimary = ({ onClick, label }: ButtonSaveProps) => {
   return (
-    <BaseButton onClick={onClick} className="button-save">
+    <BaseButton onClick={onClick} className="button-primary">
     {label}
     </BaseButton>
 )

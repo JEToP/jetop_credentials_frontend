@@ -8,7 +8,7 @@ type ButtonDeleteProps = {
 }
 const ButtonRed = ({ onClick, label }: ButtonDeleteProps) => {
   return (
-    <BaseButton onClick={onClick} className="button-delete">
+    <BaseButton onClick={onClick} className="button-red">
       {label}
     </BaseButton>
   )
