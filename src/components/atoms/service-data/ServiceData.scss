@@ -1,0 +1,27 @@
+.ServiceData {
+  width: 100%;
+  height: 100%;
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .buttons-container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: 13px;
+
+    :last-child {
+      margin-right: 23px;
+    }
+
+    > :not(:last-child) {
+      margin-right: 15px;
+    }
+  }
+}

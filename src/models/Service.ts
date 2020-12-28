@@ -1,9 +1,13 @@
 export default interface Service {
   id?: number
   name: string
+  url?: string
+  username?: string
+  password?: string
   favicon?: string
   notes?: string
-  url?: string
+  lastModified?: string
+  created?: string
 }
 
 interface ServiceOverrides {

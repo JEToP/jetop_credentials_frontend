@@ -1,5 +1,5 @@
 .LabelVisualizer {
-  padding: 30px;
+  padding: 15px;
 
   .show {
     display: flex;
@@ -7,11 +7,19 @@
 
     .label {
       flex: 1;
-      padding-right: 20px;
+      margin-right: 72px;
+
+      > p {
+        margin: 0;
+      }
     }
 
     .value {
       flex: 3;
+
+      > p {
+        margin: 0;
+      }
     }
   }
 
@@ -49,6 +57,10 @@
     justify-content: space-evenly;
     .label {
       flex: 1;
+
+      > p {
+        margin: 0;
+      }
     }
     .textbox {
       -moz-box-align: center;
@@ -74,31 +86,14 @@
       vertical-align: top;
       pointer-events: auto;
       flex: 3;
-    }
-    .textbox:hover {
-      -moz-box-align: center;
-      background-color: rgb(235, 236, 240);
-      border-color: rgb(223, 225, 230);
-      border-radius: 3px;
-      border-width: 2px;
-      border-style: solid;
-      box-sizing: border-box;
-      color: rgb(9, 30, 66);
-      cursor: text;
-      display: flex;
-      flex: 1 1 100%;
-      font-size: 14px;
-      -moz-box-pack: justify;
-      justify-content: space-between;
-      max-width: 100%;
-      overflow: hidden;
-      transition: background-color 0.2s ease-in-out 0s,
-        border-color 0.2s ease-in-out 0s;
-      overflow-wrap: break-word;
-      vertical-align: top;
-      pointer-events: auto;
-      align-items: center;
-      flex: 3;
+
+      &:hover {
+        background-color: rgb(235, 236, 240);
+      }
+
+      &:focus {
+        background-color: white;
+      }
     }
     .input {
       background-color: transparent;

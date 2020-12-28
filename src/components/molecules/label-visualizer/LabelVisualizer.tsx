@@ -1,11 +1,11 @@
-import React from "react"
+import React, { ReactNode } from "react"
 import "./LabelVisualizer.scss"
 
-type fieldProps = {
+type LabelVisualizerProps = {
   editMode: boolean
   data: {
     label: string
-    value: string
+    value: JSX.Element
   }
 }
 
@@ -13,7 +13,7 @@ type fieldProps = {
 // which is the value (i.e. the actual username or password). The second label will be replaced with an input which allows
 // to change the value when editMode is set to true.
 
-const LabelVisualizer = (props: fieldProps) => {
+const LabelVisualizer = (props: LabelVisualizerProps) => {
   const { editMode, data } = props
 
   if (editMode) {
@@ -40,9 +40,7 @@ const LabelVisualizer = (props: fieldProps) => {
         <div className="label">
           <p>{data.label}</p>
         </div>
-        <div className="value">
-          <p>{data.value}</p>
-        </div>
+        <div className="value">{data.value}</div>
       </div>
     </div>
   )
