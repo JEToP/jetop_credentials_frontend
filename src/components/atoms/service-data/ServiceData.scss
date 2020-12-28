@@ -1,22 +1,31 @@
-.ServiceData{
-  position: absolute;
-  top: 8px;
-  right: 16px;
+.ServiceData {
+  width: 100%;
+  height: 100%;
 
-  .button-container{
-    position: relative;
-    top: 8px;
-    right: 16px;
+  .content {
     display: flex;
-    padding: 10px;
-
-  }
-  .rectangle{
-    position: center;
-
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
   }
 
-  .PREVIOUS-BLOCK{
+  .buttons-container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: 13px;
+
+    :last-child {
+      margin-right: 23px;
+    }
+
+    > :not(:last-child) {
+      margin-right: 15px;
+    }
+  }
+
+  .PREVIOUS-BLOCK {
     padding: 0px 32px;
     border-left: 3px solid #fafafa;
     border-radius: 5px;

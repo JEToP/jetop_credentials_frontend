@@ -12,8 +12,11 @@ import "./App.css"
 
 import LoginScreen from "./components/templates/login/LoginScreen.style"
 import ServicesPage from "./components/templates/protected-area/ServicesPage"
+import ServiceData from "./components/atoms/service-data/ServiceData"
+import Service from "./models/Service"
 
 function App() {
+  let propsService : Service = {name: "test"};
   return (
     <Router>
       <Switch>
@@ -21,7 +24,7 @@ function App() {
           <LoginScreen />
         </Route>
         <ProtectedRoute path="/services/:id?">
-          <ServicesPage />
+          <ServiceData service={propsService}/>
         </ProtectedRoute>
         <ProtectedRoute path="*">
           <Redirect to={{ pathname: "/services" }} />

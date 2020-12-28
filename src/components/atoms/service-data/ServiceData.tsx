@@ -1,56 +1,87 @@
-import React, { useState } from "react"
-import "./ServiceData.scss";
-import ButtonDelete from "../button/variants/ButtonDelete"
-import ButtonCancel from "../button/variants/ButtonCancel"
-import ButtonEdit from "../button/variants/ButtonEdit"
-import ButtonSave from "../button/variants/ButtonSave"
+import React, { useState, useMemo } from "react"
+import "./ServiceData.scss"
+import ButtonRed from "../button/variants/ButtonRed"
+import ButtonShadedGray from "../button/variants/ButtonShadedGray"
+import ButtonPrimary from "../button/variants/ButtonPrimary"
+import LabelVisualizer from "../../molecules/label-visualizer/LabelVisualizer"
+import Password from "../../templates/password/password"
+import Service from "../../../models/Service"
+import PasswordVisualization from "../../molecules/password-visualization/passwordVisualization"
+import ProgressBar from "../../molecules/progress-bar/progressBar"
+import PasswordHistory from "../../molecules/password-visualization/passwordHistory"
 
-
-interface ServiceDataProps{
-  username?: string
-  password?: string
-  notes?: string
-  lastModified?: string
-  created?: string
-  EditMode: boolean
+interface ServiceDataProps {
+  service: Service
 }
 
-const ServiceData = (props : ServiceDataProps) => {
-  const [isEditMode, setIsEditMode] = useState(props.EditMode);
+const ServiceData = (props: ServiceDataProps) => {
+  const [isEditMode, setEditMode] = useState(false)
 
-  const onEditClick = () =>{
-    setIsEditMode(true);
+  const onEditClick = () => {
+    setEditMode(true)
   }
-  const onCancelClick = () =>{
-    setIsEditMode(false);
+  const onCancelClick = () => {
+    setEditMode(false)
   }
 
-  if(isEditMode) {
-    return (
-      <div className='ServiceData rectangle'>
-        <div className='ServiceData button-container'>
-          <ButtonCancel onClick={onCancelClick} label={"Cancel"}></ButtonCancel>
-          <ButtonDelete onClick={()=>{}} label={"Delete"}></ButtonDelete>
-          <ButtonSave onClick={()=>{}} label={"Save"}></ButtonSave>
-        </div>
-        <p>test</p>
-        <p>test</p>
-        <p>test</p>
-      </div>
-    )
-  }
+  const buttons = useMemo(
+    () =>
+      isEditMode ? (
+        <>
+          <ButtonShadedGray onClick={onCancelClick} label={"Cancel"}></ButtonShadedGray>
+          <ButtonRed onClick={() => {}} label={"Delete"}></ButtonRed>
+          <ButtonPrimary onClick={() => {}} label={"Save"}></ButtonPrimary>
+        </>
+      ) : (
+        <>
+          <ButtonShadedGray onClick={onEditClick} label={"Edit"}></ButtonShadedGray>
+        </>
+      ),
+    [isEditMode]
+  )
 
   return (
-    <div className='ServiceData panel-block'>
-      <div className='ServiceData button-container'>
-        <ButtonEdit onClick={onEditClick} label={"Edit"}></ButtonEdit>
+    <div className="ServiceData">
+      <div className="buttons-container">{buttons}</div>
+      <div className="content">
+        <div>
+          <LabelVisualizer
+            data={{
+              label: "username",
+              value: <h1></h1>,
+            }}
+            editMode={isEditMode}
+          />
+          <LabelVisualizer
+            data={{
+              label: "labelmooooooltolunga",
+              value: <h1></h1>,
+            }}
+            editMode={isEditMode}
+          />
+          <LabelVisualizer
+            data={{
+              label: "labelmooooooltolunga",
+              value: (
+                <>
+                  <PasswordVisualization password="12345678" />
+                  <ProgressBar pwd="12345678" />
+                </>
+              ),
+            }}
+            editMode={isEditMode}
+          />
+          <LabelVisualizer
+            data={{
+              label: "labelmooooooltolunga",
+              value: <PasswordHistory history={["00", "00", "0000"]} />,
+            }}
+            editMode={isEditMode}
+          />
+        </div>
       </div>
-      <p>test</p>
-      <p>test</p>
-      <p>test</p>
     </div>
-    )
-
+  )
 }
 
-export default ServiceData;
+export default ServiceData

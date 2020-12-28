@@ -1,16 +1,16 @@
 import React, { ReactNode } from "react"
-import BaseButton from "../BaseButton"
-import "./ButtonDelete.scss"
+import BaseButton from "../base-button/BaseButton"
+import "./ButtonRed.scss"
 
 type ButtonDeleteProps = {
   onClick: ()=> void
   label: string
 }
-const ButtonDelete = ({ onClick, label }: ButtonDeleteProps) => {
+const ButtonRed = ({ onClick, label }: ButtonDeleteProps) => {
   return (
     <BaseButton onClick={onClick} className="button-delete">
       {label}
     </BaseButton>
   )
 }
-export default ButtonDelete
+export default ButtonRed
