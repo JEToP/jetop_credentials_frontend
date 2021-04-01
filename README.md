@@ -5,4 +5,4 @@ A web-app for monitoring payed web services.<br/>
 Built with :heart: by JEToP's ITs
 
 ### Contributors
-<img src="https://contributors-img.web.app/image?repo=JEToP/jetop_credentials_frontend" />
+<img src="https://contributors-img.web.app/image?repo=TheGrinch00/jetop_credentials_frontend" />
